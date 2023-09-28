@@ -1,0 +1,22 @@
+# 덩치 순서대로 순위를 매긴다.
+# 같은 등수를 가지는 여러 샘플 가능
+# 다음 등수는 1,2,3...순서대로 등수가 나뉘는 것이 아닌 앞선 개수를 반영해 계산 !!!
+-> 이 덕분에 한번의 비교만으로도 등수를 구해낼 수 있다. 
+(만약 1,2,3.. 순이었으면 복잡해짐) -> 하나의 샘플에 대해 3개의 뭉탱이(낮은 등수, 같은 등수, 높은 등수)로 나눈 다음
+다시 낮은 등수와, 높은 등수에 대해서도 더이상 쪼개지지 않을 때 까지 나눈다 -> 엄청난 연산량
+
+
+# 정답
+num=int(input())
+samples=[]
+for _ in range(num):
+    w,h = map(int,input().split())
+    samples.append((w,h))
+
+for sample in samples:
+    rank=1
+    
+    for i in range(num):
+        if sample[0]<samples[i][0] and sample[1]<samples[i][1]:
+            rank+=1
+    print(rank,end=' ')
