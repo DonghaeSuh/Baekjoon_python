@@ -1,0 +1,15 @@
+# https://www.acmicpc.net/problem/2164
+# 리스트를 통해서도 가능하지만, deque의 popleft()와 rotate()를 이용해 풀면 간단히 가능
+
+# 코드
+import collections
+
+num = int(input())
+
+deque=collections.deque([i for i in range(1,num+1)])
+
+while len(deque)>1:
+    deque.popleft()
+    deque.rotate(-1)
+    
+print(deque[0])
