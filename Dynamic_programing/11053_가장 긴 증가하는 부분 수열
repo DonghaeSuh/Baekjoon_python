@@ -1,3 +1,17 @@
 # dynamic programing을 안다면 간단하게 풀 수 있는 문제. 아이디어가 중요하다
 # 이미 찾은 경로(정보)를 저장해 놓고 다음번에 사용.
-# 
+
+# 코드
+
+num=int(input())
+
+nums=list(map(int,input().split()))
+
+dp=[1]*num
+
+for i in range(1,num):
+    for j in range(i):
+        if nums[j]<nums[i]:
+            dp[i]=max(dp[j]+1,dp[i])
+
+print(max(dp))
