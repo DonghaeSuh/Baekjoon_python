@@ -1,1 +1,33 @@
+# 처음 풀어보는 분할 정복
+# 재귀 구조이며
+-> 가장 먼저 행렬처럼 접근할 수 있도록 리스트를 준비해 놓고
+-> 분할하는 함수 내에 일단 모든 영역을 다 보면서 특정 조건을 만족 할 경우 분할하는 함수를 다시 실행시킨다. (여러 분할이 일어날 수 있으므로 함수가 여러번 각각의 조건에 맞게 실행 된다)
+-> 여러 함수가 실행된 마지막에는 return이 위치해서 다시 실행된 함수에서 특정 조건에서 벗어나 재귀로 인해 늘어난 함수들이 모두 연산이 종료된 이후 완전히 함수 밖을 나가서 함수 자체를 종료시킨다
+-> 특정 조건은 틀렸기에 다시 재 분할에 들어간다는 뜻이므로 정답에 이르렀을 경우 함수는 실행 후 우리가 원하는 연산을 수행 후에 종료된다
+-> 특정 조건에 해당되지 않는 정답에 이르른 이후 우리가 수행하여 쌓아둔 정보를 우리는 초기값을 넣어 실행시킨 함수 이후에 참조하여 결과를 얻어낸다.
 
+# 코드
+N=int(input())
+
+paper=[list(map(int,input().split())) for _ in range(N)]
+
+result=[]
+def square(n,m,N):
+    point=paper[n][m]
+    
+    for x in range(n,n+N):
+        for y in range(m,m+N):
+            if point!=paper[x][y]:
+                square(n,m,N//2)
+                square(n+N//2,m,N//2)
+                square(n,m+N//2,N//2)
+                square(n+N//2,m+N//2,N//2)
+                return
+    if point==1:
+        result.append(1)
+    else:
+        result.append(0)
+        
+square(0,0,N)        
+print(result.count(0))
+print(result.count(1))
