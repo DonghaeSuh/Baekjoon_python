@@ -1,0 +1,87 @@
+# https://www.acmicpc.net/problem/1260
+
+# DFS와 BFS에 대해 오늘 배웠다.
+# 각각을 코드로 한번 정리해 보려 한다.
+
+< DFS type 1 (재귀) >
+def DFS_recursive(v,discovered=[]):
+    discovered.append(v)
+    for w in graph[v]:
+        if w not in discovered:
+            discovered=discovered(w,discovered)
+    return discovered
+
+< DFS type 2 (반복문) >
+def DFS_loop(start):
+    discovered=[]
+    stack=[start]
+
+    while stack:
+        v=stack.pop()
+        if v not in discovered:
+            discovered.append(v)
+            for w in graph[v]:
+                stack.append(w)
+    return discovered
+
+< BFS (재귀구조로 구현 불가, 반복문) >
+def BFS(start):
+    discovered=[start]
+    queue=[start]
+
+    while queue:
+        v=queue.pop(0)
+        for w in graph[v]:
+            if w not in discovered:
+                queue.append(w)
+                discovered.append(w)
+    return discovered 
+
+
+# 문제 자체는 DFS와 BFS를 안다면 풀수 있는 내용이다
+# 내가 돌리고 틀렸던 부분(주의해야 할 점)이라면
+  - 입력으로 주어지는 값들 자체가 정렬되지 않아서, 다음 노드를 찾는데에 있어 가장 작은순서대로 받아오기 위해서는 
+  - 애초에 특정 노드와 연결된 노드 정보가 담긴 리스트 내에 값들이 정렬이 되어있어야 한다. -> 정렬하지 않으면 다른 값이 나옴
+  - 각 노드들이 정수로 이루어져 있을 텐데 이는 ' '.join()을 통해 합쳐질 수 없다는 말이다. 
+  - 그래서 map(int,list)를 통해 요소의 type을 str로 바꿔주거나, for문을 돌려가며 print문에 end=' ' 를 붙여주어야 한다.
+  - 이때 또 주의해야 할 점은, 2개의 출력을 enter로 구분되어 출력시켜야 하는데, end=' '때문에 두개의 출력이 이어질 수 있다.
+  - 그래서 두 출력 사이에 print() 하나를 넣어줘야 한다.
+
+# 코드
+import collections
+N,M,V=map(int,input().split())
+
+graph=collections.defaultdict(list)
+
+for i in range(M):
+    p,c = map(int,input().split())
+    graph[p].append(c)
+    graph[c].append(p)
+    
+for i in range(1,N+1):
+    graph[i]=sorted(graph[i])
+
+def dfs(v,discovered=[]):
+    discovered.append(v)
+    for w in graph[v]:
+        if w not in discovered:
+            discovered=dfs(w,discovered)
+    return discovered
+
+def bfs(s):
+    discovered=[s]
+    stack=[s]
+    
+    while stack:
+        v=stack.pop(0)
+        for w in graph[v]:
+            if w not in discovered:
+                discovered.append(w)
+                stack.append(w)
+    return discovered
+
+for i in dfs(V):
+    print(i,end=' ')
+print()
+for i in bfs(V):
+    print(i,end=' ')   
