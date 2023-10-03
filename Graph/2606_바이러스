@@ -1,0 +1,25 @@
+# https://www.acmicpc.net/problem/2606
+
+# DFS를 알고있다면 매우 쉽게 풀 수 있는 문제
+# 주의해야 할 점은 자기 자신(1)을 포함하지 않기에 최종으로 제출된 discovered리스트의 길이에서 1을 빼줘야 한다는 것
+
+# 코드
+import collections
+num=int(input())
+link=int(input())
+
+graph=collections.defaultdict(list)
+
+for _ in range(link):
+    p,c=map(int,input().split()) 
+    graph[p].append(c)
+    graph[c].append(p)
+
+def dfs(v,discovered=[]):
+    discovered.append(v)
+    for w in graph[v]:
+        if w not in discovered:
+            discovered=dfs(w,discovered)
+    return discovered
+
+print(len(dfs(1))-1)
