@@ -1,0 +1,30 @@
+# https://www.acmicpc.net/problem/11725
+
+# BFS방식으로 접근하여 풀면 된다.
+# 주의해야할 점은 N 자체가 10만이나 되기 때문에 이미 발견된 노드들을 저장해 놓는 방식으로는 너무 오랜 시간이 걸릴 수 있다.
+####### 그리고 계속 실수하는건데 !!!!! 함수 만들고 해당 함수를 사용해야 값이 나온다!!!!!! 함수 만들어 놓고 안돌리고 결과를 얻으려고 하는건 뭔 일이냐
+
+# 코드
+import collections
+num=int(input())
+graph=collections.defaultdict(list)
+for _ in range(num-1):
+    p,c = map(int,input().split())
+    graph[p].append(c)
+    graph[c].append(p)
+  
+def bfs(start):
+    queue=[start]
+    parents=[0]*(num+1)  
+    while queue:
+        v=queue.pop(0)
+        for w in graph[v]:
+            if parents[w]==0:
+                parents[w]=v
+                queue.append(w)
+            
+    return parents
+parents=bfs(1)
+for i in range(2,num+1):
+    print(parents[i])
+        
