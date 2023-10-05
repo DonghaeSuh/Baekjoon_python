@@ -18,3 +18,4 @@
   - [1260_DFS와 BFS](https://github.com/DonghaeSuh/Baekjoon_python/blob/main/Graph/1260_DFS%EC%99%80%20BFS)
   - [2606_바이러스](https://github.com/DonghaeSuh/Baekjoon_python/blob/main/Graph/2606_%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4)
   - [11725_트리의 부모 찾기](https://github.com/DonghaeSuh/Baekjoon_python/blob/main/Graph/11725_%ED%8A%B8%EB%A6%AC%EC%9D%98%20%EB%B6%80%EB%AA%A8%20%EC%B0%BE%EA%B8%B0)
+  - [11725_트리 순회](https://github.com/DonghaeSuh/Baekjoon_python/blob/main/Graph/1991_%ED%8A%B8%EB%A6%AC%20%EC%88%9C%ED%9A%8C)
