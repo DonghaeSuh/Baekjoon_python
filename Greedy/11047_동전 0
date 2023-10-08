@@ -2,22 +2,17 @@
 
 # 간단히 생각해서 풀 수 있는 문제
 # 큰 값부터 하나씩 나누고 몫과 나머지를 필요에 맞게 사용
+# 단위와 값이 같을 경우를 고려해줘야한다!!!
 
 # 코드
-num, won = map(int,input().split())
-values=[]
+n, won = map(int,input().split())
 
+units=[int(input()) for _ in range(n)]
+units.reverse()
 
-for i in range(num):
-    value=int(input())
-    values.append(value)
-    
-values.reverse()
 cnt=0
-for value in values:
-    q,won=divmod(won,value)
-    if q>0:
+for unit in units:
+    if unit<=won:
+        q,won= won//unit, won%unit
         cnt+=q
-    if won==0:
-        break
-print(cnt)
+print(cnt) 
